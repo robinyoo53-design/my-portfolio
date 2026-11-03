@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kyunghan Yoo | Portfolio</title>
+<meta name="description" content="Personal website of Kyunghan Yoo, a business and management student who builds with AI tools.">
+<style>
+  :root {
+    --bg: #f7f5ef;
+    --surface: #ffffff;
+    --ink: #14213d;
+    --muted: #4f5b6b;
+    --accent: #14213d;
+    --warm: #d9822b;
+    --accent-ink: #ffffff;
+    --line: #dfe3e8;
+    --ph: #fff2a8;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  .skip { position: absolute; left: -999px; top: 0; background: var(--accent); color: var(--accent-ink); padding: .5rem 1rem; z-index: 20; }
+  .skip:focus { left: 0; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 3px solid #f5a623; outline-offset: 2px; }
+
+  header.site {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(251,251,248,.96);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar { max-width: 960px; margin: 0 auto; padding: .6rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .brand { font-weight: 700; text-decoration: none; color: var(--ink); }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: .25rem; flex-wrap: wrap; }
+  nav a { display: block; padding: .4rem .8rem; border-radius: 999px; text-decoration: none; color: var(--muted); font-weight: 600; }
+  nav a:hover { background: #eef2f8; color: var(--ink); }
+  nav a.active { background: var(--accent); color: var(--accent-ink); }
+
+  main { max-width: 960px; margin: 0 auto; padding: 0 1rem 3rem; }
+  section { padding: 3rem 0 1rem; }
+  /* Gives the last section room so the menu can highlight Skills and Contact separately */
+  #contact { min-height: 85vh; }
+  h1 { font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.15; margin: 0 0 .5rem; }
+  h2 { font-size: 1.6rem; margin: 0 0 1rem; border-bottom: 2px solid var(--line); padding-bottom: .4rem; }
+  h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 40rem; }
+  .hero { margin-top: 1.5rem; padding: 2.5rem 1.5rem; border-radius: 16px; background: linear-gradient(135deg, #14213d 0%, #26406e 100%); color: #fff; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+  .hero h1, .hero .lead { color: #fff; }
+  .hero .lead { opacity: .92; }
+  .hero .btn { background: var(--warm); color: #14213d; }
+  .monogram { width: 96px; height: 96px; border-radius: 50%; background: var(--warm); color: #14213d; display: grid; place-items: center; font-size: 2.2rem; font-weight: 800; letter-spacing: .04em; flex: none; }
+  .hero-text { flex: 1 1 18rem; }
+  .card[data-category="coursework"] { border-left: 5px solid #2f6fb3; }
+  .card[data-category="personal"] { border-left: 5px solid var(--warm); }
+  .card[data-category="work"] { border-left: 5px solid #3d8c6a; }
+  h2 { border-bottom-color: var(--warm); }
+  .btn { display: inline-block; margin-top: .75rem; padding: .6rem 1.1rem; border-radius: 8px; background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none; }
+
+  /* Placeholders: yellow so they are easy to find and replace */
+  .ph { background: var(--ph); padding: 0 .2em; border-radius: 3px; }
+
+  .filters { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .filters button {
+    font: inherit; font-weight: 600; cursor: pointer;
+    padding: .45rem .9rem; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  .filters button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .status { color: var(--muted); font-size: .95rem; margin: 0 0 1rem; }
+
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem; }
+  .card[hidden] { display: none; }
+  .tag { display: inline-block; font-size: .8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .04em; margin-bottom: .3rem; }
+
+  ul.chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  ul.chips li { background: var(--surface); border: 1px solid var(--line); padding: .35rem .8rem; border-radius: 999px; }
+
+  footer { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 3rem; color: var(--muted); border-top: 1px solid var(--line); font-size: .9rem; }
+
+  @media (max-width: 560px) {
+    .bar { flex-direction: column; align-items: flex-start; }
+    nav a { padding: .35rem .65rem; }
+    html { scroll-padding-top: 7rem; } /* two-row menu on phones */
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#intro">Kyunghan Yoo</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#intro">Intro</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. INTRODUCTION -->
+  <section id="intro" class="hero" aria-labelledby="intro-title">
+    <div class="monogram" aria-hidden="true">KY</div>
+    <div class="hero-text">
+    <h1 id="intro-title">Kyunghan Yoo</h1>
+    <p class="lead">
+      Business and management student at the University of Utah Asia Campus who builds with AI tools.
+      I want to build my career in business.
+    </p>
+    <a class="btn" href="#projects">See my work</a>
+    </div>
+  </section>
+
+  <!-- 2. ABOUT -->
+  <section id="about" aria-labelledby="about-title">
+    <h2 id="about-title">About</h2>
+    <p>My father runs a business, and that is why I became interested in a career in business. I am studying business and management. I also build websites with AI tools, which is often called vibe coding.</p>
+    <p><strong>Education:</strong> University of Utah Asia Campus, Business / Management.</p>
+  </section>
+
+  <!-- 3. PROJECTS (interactive filter) -->
+  <section id="projects" aria-labelledby="projects-title">
+    <h2 id="projects-title">Projects</h2>
+    <div class="filters" role="group" aria-label="Filter projects by category">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="coursework" aria-pressed="false">Coursework</button>
+      <button type="button" data-filter="personal" aria-pressed="false">Personal</button>
+      <button type="button" data-filter="work" aria-pressed="false">Work</button>
+    </div>
+    <p class="status" id="filter-status" role="status" aria-live="polite">Showing all projects.</p>
+
+    <div class="grid" id="project-grid">
+      <article class="card" data-category="coursework">
+        <span class="tag">Coursework</span>
+        <h3>AI Artifact 1: Field Explainer (COMP 1960)</h3>
+        <p>A one-page explainer about correlation versus causation, written for a manager who reads data reports. I made a draft and a revised final version, and added sources.</p>
+      </article>
+
+      <article class="card" data-category="coursework">
+        <span class="tag">Coursework</span>
+        <h3>This website (COMP 1960)</h3>
+        <p>A small personal site built with AI help. I planned it, tested it, and revised it as part of the course.</p>
+      </article>
+
+      <article class="card" data-category="personal">
+        <span class="tag">Personal</span>
+        <h3>Subscription newsletter website</h3>
+        <p>I developed a subscription-only website that sends newsletters to subscribers automatically.</p>
+      </article>
+
+      <article class="card" data-category="work">
+        <span class="tag">Work</span>
+        <h3>Intern at an AI development company</h3>
+        <p>I worked as an intern at a company that develops AI.</p>
+      </article>
+    </div>
+    <p class="status" id="empty-msg" hidden>No projects in this category yet.</p>
+  </section>
+
+  <!-- 4. SKILLS -->
+  <section id="skills" aria-labelledby="skills-title">
+    <h2 id="skills-title">Skills &amp; Interests</h2>
+    <p class="status">Only things I can explain in an interview.</p>
+    <ul class="chips">
+      <li>Vibe coding (building with AI tools)</li>
+      <li>Business and management</li>
+      <li>Family business</li>
+    </ul>
+  </section>
+
+  <!-- 5. CONTACT -->
+  <section id="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">Contact</h2>
+    <p>The best way to reach me is by email: <a href="mailto:robinyoo53@gmail.com">robinyoo53@gmail.com</a>.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>Built with the help of AI for COMP 1960. All content was provided and verified by Kyunghan Yoo.</p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Feature 1: project filter ---------- */
+  var buttons = document.querySelectorAll(".filters button");
+  var cards = document.querySelectorAll("#project-grid .card");
+  var status = document.getElementById("filter-status");
+  var empty = document.getElementById("empty-msg");
+  var labels = { all: "all projects", coursework: "coursework projects", personal: "personal projects", work: "work projects" };
+
+  function applyFilter(key) {
+    var shown = 0;
+    cards.forEach(function (card) {
+      var match = key === "all" || card.dataset.category === key;
+      card.hidden = !match;
+      if (match) shown++;
+    });
+    buttons.forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.filter === key));
+    });
+    status.textContent = "Showing " + shown + " of " + cards.length + " (" + labels[key] + ").";
+    empty.hidden = shown !== 0;
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener("click", function () { applyFilter(b.dataset.filter); });
+  });
+
+  /* ---------- Feature 2: highlight the current section in the menu ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll("nav a"));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+
+  function setActive(id) {
+    links.forEach(function (a) {
+      var on = a.getAttribute("href") === "#" + id;
+      a.classList.toggle("active", on);
+      if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+    });
+  }
+
+  function onScroll() {
+    var y = window.scrollY + 120;
+    var current = sections[0].id;
+    sections.forEach(function (s) { if (s.offsetTop <= y) current = s.id; });
+    /* at the very bottom of the page, the last section is current */
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
+      current = sections[sections.length - 1].id;
+    }
+    setActive(current);
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>
